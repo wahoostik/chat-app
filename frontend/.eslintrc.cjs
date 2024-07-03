@@ -17,5 +17,24 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'indent': [
+      'error',
+      4
+    ],
+    'eslint linebreak-style': [
+        0,
+        'error',
+        'windows'
+    ],
+    'quotes': [
+        'error',
+        'single'
+    ],
+    'semi': [
+        'error',
+        'always'
+    ],
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-uses-react': 0
   },
 }
