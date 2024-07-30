@@ -1,15 +1,15 @@
 export const login = (req, res) => {
-    console.log("login");
+    console.log('login');
 };
 
 export const signup = async (req, res) => {
     try {
-        const { fullname, username, password, confirmPassword, gender} = req.body;
+        const { fullName, username, password, confirmPassword, gender } = req.body;
     } catch (error) {
-        console.trace("error", error);
+        console.trace('Error Signup :', error);
     }
 };
 
 export const logout = (req, res) => {
-    console.log("logout");
+    console.log('logout');
 };
