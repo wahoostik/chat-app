@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import morgan from 'morgan';
 
 import authRouter from './routers/auth.router.js';
-import connectToMongoDB from './database/connectToMongoDB.js';
+import { connectToMongoDB } from './database/connectToMongoDB.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
