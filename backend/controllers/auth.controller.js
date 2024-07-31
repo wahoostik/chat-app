@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import bcrypt from 'bcryptjs';
 import { User } from '../models/user.model.js';
+import { generateTokenAndCookie } from '../utils/jwt.js';
 
 export const login = (req, res) => {
     console.log('login');
@@ -39,6 +40,7 @@ export const signup = async (req, res) => {
         });
 
         if (newUser) {
+            generateTokenAndCookie(newUser._id, res);
             await newUser.save();
             res.status(201).json({
                 _id: newUser._id,
