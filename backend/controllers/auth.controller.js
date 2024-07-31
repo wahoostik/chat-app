@@ -84,5 +84,11 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-    console.log('logout');
+    try {
+        res.cookie('jwt', '', { maxAge: 0 });
+        res.status(200).json({ message: 'Déconnexion réussie avec succès !' });
+    } catch (error) {
+        console.error(chalk.red('Erreur Logout Controller :', error.message));
+        res.status(500).json({ error: 'Erreur lors de la déconnexion d\'un utilisateur' });
+    }
 };
