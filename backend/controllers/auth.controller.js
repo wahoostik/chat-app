@@ -3,10 +3,6 @@ import bcrypt from 'bcryptjs';
 import { User } from '../models/user.model.js';
 import { generateTokenAndCookie } from '../utils/jwt.js';
 
-export const login = (req, res) => {
-    console.log('login');
-};
-
 export const signup = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -16,7 +12,7 @@ export const signup = async (req, res) => {
             return res.status(400).json({error: 'Le mot de passe et sa confirmation ne sont pas exacts'});
         };
 
-        // Vérification d'un nom d'utilisateur exisatant
+        // Vérification d'un nom d'utilisateur existant
         const user = await User.findOne({username});
         if (user) {
             return res.status(400).json({error: 'Le nom d\'utilisateur existe déjà'});
@@ -50,11 +46,40 @@ export const signup = async (req, res) => {
             });
         } else {
             res.status(400).json({ error: 'Données d\'utilisateur inccorect'});
-        }
+        };
 
     } catch (error) {
         console.error(chalk.red('Erreur Signup Controller :', error.message));
         res.status(500).json({ error: 'Erreur lors de la création d\'un utilisateur' });
+    }
+};
+
+export const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Vérification du nom d'utilisateur
+        const user = await User.findOne({username});
+        const passwordIsCorrect = await bcrypt.compare(password, user?.password || '');
+        // Si user?.password est undefined, une chaîne vide ('') sera utilisée à la place, cela évite une erreur si user ou user.password n’existe pas.
+
+        if (!user || !passwordIsCorrect) {
+            return res.status(400).json({error: 'Nom d\'utilisateur ou mot de passe incorrect'});
+        };
+
+        // On génère un token lors de la connexion
+        generateTokenAndCookie(user._id, res);
+
+        res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            username: user.username,
+            profilePic: user.profilePic,
+        });
+
+    } catch (error) {
+        console.error(chalk.red('Erreur Login Controller :', error.message));
+        res.status(500).json({ error: 'Erreur lors de la connexion d\'un utilisateur' });
     }
 };
 
