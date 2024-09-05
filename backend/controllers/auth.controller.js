@@ -45,7 +45,7 @@ export const signup = async (req, res) => {
                 profilePic: newUser.profilePic,
             });
         } else {
-            res.status(400).json({ error: 'Données d\'utilisateur inccorect'});
+            res.status(400).json({ error: 'Données d\'utilisateur incorrect'});
         };
 
     } catch (error) {
