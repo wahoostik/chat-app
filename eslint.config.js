@@ -22,6 +22,7 @@ export default [
                 4
             ],
             'linebreak-style': [
+                0,
                 'error',
                 'windows'
             ],

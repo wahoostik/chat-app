@@ -7,8 +7,8 @@ import cookieParser from 'cookie-parser';
 
 import authRouter from './routers/auth.router.js';
 import messageRouter from './routers/message.router.js';
-import userRouter from './routers/user.router.js';
 import { connectToMongoDB } from './database/connectToMongoDB.js';
+import userRouter from './routers/user.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
