@@ -47,3 +47,26 @@ export const sendMessage = async (req, res) => {
         res.status(500).json({ error: 'Erreur lors de l\'envoi d\'un message' });
     }
 };
+
+export const getMessages = async (req, res) => {
+    try {
+        const { id: userToChatId } = req.params; // On récupère l'ID
+        const senderId = req.user._id; // Obtention de l'ID de l'expéditeur
+
+        // On trouver une conversation entre 2 utilisateurs
+        const conversation = await Conversation.findOne({
+            participants: { $all: [senderId, userToChatId] },
+        }).populate('messages'); // Méthode de mongoose pour récupérer les messages
+
+        // Si la conversation n'existe pas
+        if (!conversation) return res.status(200).json([]);
+
+        const messages = conversation.messages;
+
+        res.status(200).json(messages);
+        
+    } catch (error) {
+        console.error(chalk.red('Erreur Get Messages Controller :', error.message));
+        res.status(500).json({ error: 'Erreur lors de la réception d\'un message' });
+    }
+};
