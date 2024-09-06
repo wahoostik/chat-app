@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 
 import authRouter from './routers/auth.router.js';
 import messageRouter from './routers/message.router.js';
+import userRouter from './routers/user.router.js';
 import { connectToMongoDB } from './database/connectToMongoDB.js';
 
 const app = express();
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/users', userRouter);
 
 
 app.listen(PORT, () => {
