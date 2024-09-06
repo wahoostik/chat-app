@@ -1,25 +1,14 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import Login from './pages/login/Login';
 
 function App() {
-    const [count, setCount] = useState(0);
 
     return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
+        <div className='bg-gradient-to-tr from-cyan-500 via-sky-600 to-blue-900 h-screen'>
+            <div className='p-4 h-screen flex items-center justify-center'>
+                <Login />
             </div>
-            <h1>Vite + React</h1>
-            <button className="btn btn-outline btn-primary">Primary</button>
-        </>
+        </div>
     );
 }
 
-export default App;
+export default App

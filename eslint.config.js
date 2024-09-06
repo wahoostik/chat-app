@@ -10,7 +10,7 @@ export default [
             },
             ecmaVersion: 'latest',
         },
-        files: ['**/*.js'],
+        files: ['backend/**/*.js'],
         plugins: {
             jsdoc: jsdoc
         },
